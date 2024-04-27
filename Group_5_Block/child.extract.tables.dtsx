@@ -11,8 +11,8 @@
   DTS:LocaleID="1033"
   DTS:ObjectName="Package"
   DTS:PackageType="5"
-  DTS:VersionBuild="2"
-  DTS:VersionGUID="{FA34C6F6-833E-4C23-AD94-10730CADA95E}">
+  DTS:VersionBuild="9"
+  DTS:VersionGUID="{CE757704-D046-474F-A4C2-B3D43AAF600F}">
   <DTS:Property
     DTS:Name="PackageFormatVersion">8</DTS:Property>
   <DTS:ConnectionManagers>
@@ -26,6 +26,20 @@
       <DTS:ObjectData>
         <DTS:ConnectionManager
           DTS:ConnectionString="server=127.0.0.1;user id=root;database=cut_bi_assignment;" />
+      </DTS:ObjectData>
+    </DTS:ConnectionManager>
+    <DTS:ConnectionManager
+      DTS:refId="Package.ConnectionManagers[DESKTOP-DI4DCC2.MSCDA_C23157291S]"
+      DTS:CreationName="OLEDB"
+      DTS:DTSID="{D17012BF-EDF7-4C0A-ABE3-D2FA1B892A9F}"
+      DTS:ObjectName="DESKTOP-DI4DCC2.MSCDA_C23157291S">
+      <DTS:PropertyExpression
+        DTS:Name="ConnectionString">@[$Project::DESKTOPDI4DCC2MSCDA_C23157291S_ConnectionString]</DTS:PropertyExpression>
+      <DTS:ObjectData>
+        <DTS:ConnectionManager
+          DTS:ConnectRetryCount="1"
+          DTS:ConnectRetryInterval="5"
+          DTS:ConnectionString="Data Source=DESKTOP-DI4DCC2;Initial Catalog=MSCDA_C23157291S;Provider=SQLNCLI11.1;Integrated Security=SSPI;Application Name=SSIS-Package-{D17012BF-EDF7-4C0A-ABE3-D2FA1B892A9F}DESKTOP-DI4DCC2.MSCDA_C23157291S;Auto Translate=False;" />
       </DTS:ObjectData>
     </DTS:ConnectionManager>
   </DTS:ConnectionManagers>
@@ -204,7 +218,155 @@ FROM `cut_bi_assignment`.`actor`;</property>
                 </output>
               </outputs>
             </component>
+            <component
+              refId="Package\extract actor src\DST actor"
+              componentClassID="Microsoft.OLEDBDestination"
+              contactInfo="OLE DB Destination;Microsoft Corporation; Microsoft SQL Server; (C) Microsoft Corporation; All Rights Reserved; http://www.microsoft.com/sql/support;4"
+              description="OLE DB Destination"
+              name="DST actor"
+              usesDispositions="true"
+              version="4">
+              <properties>
+                <property
+                  dataType="System.Int32"
+                  description="The number of seconds before a command times out.  A value of 0 indicates an infinite time-out."
+                  name="CommandTimeout">0</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the name of the database object used to open a rowset."
+                  name="OpenRowset">[extract].[actor]</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies the variable that contains the name of the database object used to open a rowset."
+                  name="OpenRowsetVariable"></property>
+                <property
+                  dataType="System.String"
+                  description="The SQL command to be executed."
+                  name="SqlCommand"
+                  UITypeEditor="Microsoft.DataTransformationServices.Controls.ModalMultilineStringEditor"></property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the column code page to use when code page information is unavailable from the data source."
+                  name="DefaultCodePage">1252</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Forces the use of the DefaultCodePage property value when describing character data."
+                  name="AlwaysUseDefaultCodePage">false</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies the mode used to access the database."
+                  name="AccessMode"
+                  typeConverter="AccessMode">3</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the values supplied for identity columns will be copied to the destination. If false, values for identity columns will be auto-generated at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepIdentity">false</property>
+                <property
+                  dataType="System.Boolean"
+                  description="Indicates whether the columns containing null will have null inserted in the destination. If false, columns containing null will have their default values inserted at the destination. Applies only if fast load is turned on."
+                  name="FastLoadKeepNulls">false</property>
+                <property
+                  dataType="System.String"
+                  description="Specifies options to be used with fast load.  Applies only if fast load is turned on."
+                  name="FastLoadOptions">TABLOCK,CHECK_CONSTRAINTS</property>
+                <property
+                  dataType="System.Int32"
+                  description="Specifies when commits are issued during data insertion.  A value of 0 specifies that one commit will be issued at the end of data insertion.  Applies only if fast load is turned on."
+                  name="FastLoadMaxInsertCommitSize">2147483647</property>
+              </properties>
+              <connections>
+                <connection
+                  refId="Package\extract actor src\DST actor.Connections[OleDbConnection]"
+                  connectionManagerID="Package.ConnectionManagers[DESKTOP-DI4DCC2.MSCDA_C23157291S]"
+                  connectionManagerRefId="Package.ConnectionManagers[DESKTOP-DI4DCC2.MSCDA_C23157291S]"
+                  description="The OLE DB runtime connection used to access the database."
+                  name="OleDbConnection" />
+              </connections>
+              <inputs>
+                <input
+                  refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input]"
+                  errorOrTruncationOperation="Insert"
+                  errorRowDisposition="FailComponent"
+                  hasSideEffects="true"
+                  name="OLE DB Destination Input">
+                  <inputColumns>
+                    <inputColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].Columns[first_name]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="first_name"
+                      externalMetadataColumnId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[first_name]"
+                      lineageId="Package\extract actor src\actor src.Outputs[ADO NET Source Output].Columns[first_name]" />
+                    <inputColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].Columns[last_name]"
+                      cachedDataType="wstr"
+                      cachedLength="45"
+                      cachedName="last_name"
+                      externalMetadataColumnId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[last_name]"
+                      lineageId="Package\extract actor src\actor src.Outputs[ADO NET Source Output].Columns[last_name]" />
+                    <inputColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].Columns[last_update]"
+                      cachedDataType="dbTimeStamp"
+                      cachedName="last_update"
+                      externalMetadataColumnId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[last_update]"
+                      lineageId="Package\extract actor src\actor src.Outputs[ADO NET Source Output].Columns[last_update]" />
+                  </inputColumns>
+                  <externalMetadataColumns
+                    isUsed="True">
+                    <externalMetadataColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[actor_id]"
+                      dataType="i2"
+                      name="actor_id" />
+                    <externalMetadataColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[first_name]"
+                      dataType="wstr"
+                      length="45"
+                      name="first_name" />
+                    <externalMetadataColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[last_name]"
+                      dataType="wstr"
+                      length="45"
+                      name="last_name" />
+                    <externalMetadataColumn
+                      refId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input].ExternalColumns[last_update]"
+                      dataType="dbTimeStamp"
+                      name="last_update" />
+                  </externalMetadataColumns>
+                </input>
+              </inputs>
+              <outputs>
+                <output
+                  refId="Package\extract actor src\DST actor.Outputs[OLE DB Destination Error Output]"
+                  exclusionGroup="1"
+                  isErrorOut="true"
+                  name="OLE DB Destination Error Output"
+                  synchronousInputId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input]">
+                  <outputColumns>
+                    <outputColumn
+                      refId="Package\extract actor src\DST actor.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      dataType="i4"
+                      lineageId="Package\extract actor src\DST actor.Outputs[OLE DB Destination Error Output].Columns[ErrorCode]"
+                      name="ErrorCode"
+                      specialFlags="1" />
+                    <outputColumn
+                      refId="Package\extract actor src\DST actor.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      dataType="i4"
+                      lineageId="Package\extract actor src\DST actor.Outputs[OLE DB Destination Error Output].Columns[ErrorColumn]"
+                      name="ErrorColumn"
+                      specialFlags="2" />
+                  </outputColumns>
+                  <externalMetadataColumns />
+                </output>
+              </outputs>
+            </component>
           </components>
+          <paths>
+            <path
+              refId="Package\extract actor src.Paths[ADO NET Source Output]"
+              endId="Package\extract actor src\DST actor.Inputs[OLE DB Destination Input]"
+              name="ADO NET Source Output"
+              startId="Package\extract actor src\actor src.Outputs[ADO NET Source Output]" />
+          </paths>
         </pipeline>
       </DTS:ObjectData>
     </DTS:Executable>
@@ -224,7 +386,7 @@ FROM `cut_bi_assignment`.`actor`;</property>
         <NodeLayout
           Size="157,42"
           Id="Package\extract actor src"
-          TopLeft="304.5,127.5" />
+          TopLeft="500.5,50.5" />
       </GraphLayout>
     </LayoutInfo>
   </Package>
@@ -232,11 +394,49 @@ FROM `cut_bi_assignment`.`actor`;</property>
     design-time-name="Package\extract actor src">
     <LayoutInfo>
       <GraphLayout
-        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph">
+        Capacity="4" xmlns="clr-namespace:Microsoft.SqlServer.IntegrationServices.Designer.Model.Serialization;assembly=Microsoft.SqlServer.IntegrationServices.Graph" xmlns:mssgle="clr-namespace:Microsoft.SqlServer.Graph.LayoutEngine;assembly=Microsoft.SqlServer.Graph" xmlns:assembly="http://schemas.microsoft.com/winfx/2006/xaml">
         <NodeLayout
           Size="121,42"
           Id="Package\extract actor src\actor src"
-          TopLeft="340,51" />
+          TopLeft="153,67" />
+        <NodeLayout
+          Size="128,42"
+          Id="Package\extract actor src\DST actor"
+          TopLeft="162.5,220.5" />
+        <EdgeLayout
+          Id="Package\extract actor src.Paths[ADO NET Source Output]"
+          TopLeft="213.5,109">
+          <EdgeLayout.Curve>
+            <mssgle:Curve
+              StartConnector="{assembly:Null}"
+              EndConnector="13,111.5"
+              Start="0,0"
+              End="13,104">
+              <mssgle:Curve.Segments>
+                <mssgle:SegmentCollection
+                  Capacity="5">
+                  <mssgle:LineSegment
+                    End="0,51.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="0,51.75"
+                    Point2="0,55.75"
+                    Point3="4,55.75" />
+                  <mssgle:LineSegment
+                    End="9,55.75" />
+                  <mssgle:CubicBezierSegment
+                    Point1="9,55.75"
+                    Point2="13,55.75"
+                    Point3="13,59.75" />
+                  <mssgle:LineSegment
+                    End="13,104" />
+                </mssgle:SegmentCollection>
+              </mssgle:Curve.Segments>
+            </mssgle:Curve>
+          </EdgeLayout.Curve>
+          <EdgeLayout.Labels>
+            <EdgeLabelCollection />
+          </EdgeLayout.Labels>
+        </EdgeLayout>
       </GraphLayout>
     </LayoutInfo>
   </TaskHost>
@@ -245,6 +445,19 @@ FROM `cut_bi_assignment`.`actor`;</property>
     <Properties>
       <Property>
         <Name>DataSourceViewID</Name>
+      </Property>
+    </Properties>
+  </PipelineComponentMetadata>
+  <PipelineComponentMetadata
+    design-time-name="Package\extract actor src\DST actor">
+    <Properties>
+      <Property>
+        <Name>DataSourceViewID</Name>
+      </Property>
+      <Property>
+        <Name>TableInfoObjectType</Name>
+        <Value
+          type="q2:string">Table</Value>
       </Property>
     </Properties>
   </PipelineComponentMetadata>
